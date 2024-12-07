@@ -2,8 +2,7 @@ from destination import Destination
 from soup import return_soup
 import threading
 from excel import get_excel
-import os
-import subprocess
+from database import Database
 
 def update_info(destination):
     """Send request to a destination specific url and update the data.
@@ -45,7 +44,8 @@ def fetch_destinations():
     
     return excursion_destinations
 
+database = Database()
+database.connect()
 excursion_destinations = fetch_destinations()
-get_excel(excursion_destinations)
-
-subprocess.Popen(f'explorer {os.getcwd()}')
+database.insert_destinations(excursion_destinations)
+# get_excel(excursion_destinations)
