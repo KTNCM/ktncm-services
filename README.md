@@ -1,0 +1,1 @@
+[![Run Tests](https://github.com/KTNCM/ktncm-services/actions/workflows/test.yml/badge.svg)](https://github.com/KTNCM/ktncm-services/actions/workflows/test.yml)
