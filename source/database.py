@@ -17,6 +17,11 @@ class Database:
         }
 
     def connect(self, max_retries = 10) -> None:
+        """Connects to database using data provided in environment variables.
+
+        Args:
+            max_retries (int, optional): The maximum number of retry attempts. Defaults to 10.
+        """
         retries = 0
         while retries < max_retries:
             try:
@@ -28,7 +33,12 @@ class Database:
                 retries += 1
                 time.sleep(5)
 
-    def insert_destinations(self, excursion_destinations: list[Destination]) -> None: 
+    def insert_destinations(self, excursion_destinations: list[Destination]) -> None:
+        """Inserts destinations data into database.
+
+        Args:
+            excursion_destinations (list[Destination]): List of destination objects.
+        """        
         insert_query = """
         INSERT INTO destinations (name, description, contact_info)
         VALUES (%s, %s, %s);
