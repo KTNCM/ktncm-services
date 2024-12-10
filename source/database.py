@@ -16,7 +16,7 @@ class Database:
             'port': os.getenv('DB_PORT'),
         }
 
-    def connect(self, max_retries = 10) -> None:
+    def connect(self, max_retries = 10, sleep_time = 5) -> None:
         """Connects to database using data provided in environment variables.
 
         Args:
@@ -29,9 +29,9 @@ class Database:
                 print("Connected to the database!")
                 break
             except mysql.connector.Error as err:
-                print(f"Database not ready, retrying in 5 seconds... Error: {err}")
+                print(f"Database not ready, retrying in {sleep_time} seconds... Error: {err}")
                 retries += 1
-                time.sleep(5)
+                time.sleep(sleep_time)
 
     def insert_destinations(self, excursion_destinations: list[Destination]) -> None:
         """Inserts destinations data into database.
