@@ -12,5 +12,4 @@ def return_soup(url) -> BeautifulSoup:
     """
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
-    print(type(soup))
     return soup

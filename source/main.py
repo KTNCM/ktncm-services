@@ -1,7 +1,6 @@
 from destination import Destination
 from soup import return_soup
 import threading
-from excel import get_excel
 from database import Database
 
 def update_info(destination):
@@ -48,4 +47,3 @@ database = Database()
 database.connect()
 excursion_destinations = fetch_destinations()
 database.insert_destinations(excursion_destinations)
-# get_excel(excursion_destinations)
