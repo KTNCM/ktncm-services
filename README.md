@@ -1,1 +1,2 @@
 [![Run Tests](https://github.com/KTNCM/ktncm-services/actions/workflows/test.yml/badge.svg)](https://github.com/KTNCM/ktncm-services/actions/workflows/test.yml)
+[![codecov](https://codecov.io/gh/KTNCM/ktncm-services/branch/main/graph/badge.svg)](https://codecov.io/gh/KTNCM/ktncm-services)
