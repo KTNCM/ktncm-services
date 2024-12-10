@@ -5,12 +5,6 @@ services:
     container_name: python_scraper
     depends_on:
       - db
-    environment:
-      - DB_HOST=db
-      - DB_PORT=3306
-      - DB_USER=root
-      - DB_PASSWORD=root
-      - DB_NAME=ktncm
     ports:
       - "5000:5000"
 
@@ -18,8 +12,8 @@ services:
     image: mysql:8.0
     container_name: ktncm_db
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: ktncm
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
     ports:
       - "3306:3306"
     volumes:
