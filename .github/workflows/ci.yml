@@ -27,16 +27,29 @@ jobs:
       - name: Run tests with pytest
         run: pytest --cov --cov-report=xml
 
-      - name: Verify coverage file exists
-        run: ls -l coverage.xml
+      - name: Store unit test coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage.xml
+          if-no-files-found: error
+
   coverage:
     needs: test
     runs-on: ubuntu-latest
     steps:   
-      - uses: actions/checkout@v4  
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Download coverage report
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-report
+          path: ./coverage.xml
+
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:
-          files: coverage.xml
+          files: ./coverage.xml
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
