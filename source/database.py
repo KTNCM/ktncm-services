@@ -40,13 +40,15 @@ class Database:
             excursion_destinations (list[Destination]): List of destination objects.
         """        
         insert_query = """
-        INSERT INTO destinations (name, description, contact_info)
-        VALUES (%s, %s, %s)
+        INSERT INTO destinations (name, description, contact_info, img_url)
+        VALUES (%s, %s, %s, %s)
         ON DUPLICATE KEY UPDATE
         description = VALUES(description),
-        contact_info = VALUES(contact_info);
+        contact_info = VALUES(contact_info),
+        img_url = VALUES(img_url);
         """
-        data = [(dest.name, dest.description, "".join(dest.contact_info)) for dest in excursion_destinations]
+
+        data = [(dest.name, dest.description, "".join(dest.contact_info), dest.img_url) for dest in excursion_destinations]
 
         cursor = self.connection.cursor()
         cursor.executemany(insert_query, data)

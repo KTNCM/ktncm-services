@@ -15,6 +15,8 @@ def update_info(destination) -> None:
     
     h4 = dest_soup.find('div', 'kontakt-box').findAll('a')
     destination.contact_info = [i.text for i in h4]
+    img = dest_soup.find('div', 'main-img-box').find('img')
+    destination.img_url = img['src']
     
 url = "https://www.kaerntencard.at/sommer/en/ausflugsziele-uebersicht/"
 soup = return_soup(url)
@@ -31,7 +33,10 @@ def fetch_destinations() -> list[Destination]:
         destination = Destination()
         h3 = div.find('div', class_='txt-box').find('h3')
         if(h3 == None):
-            continue   
+            continue
+        # Entries with issues
+        if(h3.text == "Forest Rope Park Pyramidenkogel "):  
+            continue 
         destination.name = h3.text
         
         destination.url = div.find('a', class_='btn-std')['href']
