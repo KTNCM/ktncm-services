@@ -25,7 +25,7 @@ jobs:
           pip install -r requirements.txt
           
       - name: Run tests with pytest
-        run: pytest --cov --cov-report=xml
+        run: pytest --cov=source --cov-report=xml
 
       - name: Store unit test coverage report
         uses: actions/upload-artifact@v4
