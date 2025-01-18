@@ -53,14 +53,4 @@ class Database:
         cursor = self.connection.cursor()
         cursor.executemany(insert_query, data)
 
-        # MySql increments Id even on update so it needs to be corrected
-        # Step 1: Calculate the next auto-increment value
-        # cursor.execute("SELECT MAX(id) + 1 FROM destinations")
-        # next_auto_increment = cursor.fetchone()[0]
-
-        # Step 2: Dynamically construct and execute the ALTER TABLE statement if the table is not empty
-        # if next_auto_increment:
-        #     alter_query = f"ALTER TABLE destinations AUTO_INCREMENT = {next_auto_increment}"
-        #     cursor.execute(alter_query)
-
         self.connection.commit()
