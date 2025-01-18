@@ -16,7 +16,7 @@ def update_info(destination) -> None:
     destination.contact_info = [i.text for i in h4]
     img = dest_soup.find('div', 'main-img-box').find('img')
     destination.img_url = img['src']
-    
+
 url = "https://www.kaerntencard.at/sommer/en/ausflugsziele-uebersicht/"
 soup = return_soup(url)
 
