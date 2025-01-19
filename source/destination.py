@@ -6,5 +6,5 @@ class Destination:
     description: str = None
     url: str = None
     price: str = None
-    contact_info: list = None
-    img_url: str = None
+    contact: list = None
+    url: str = None
