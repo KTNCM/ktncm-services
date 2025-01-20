@@ -2,7 +2,6 @@ import unittest
 from unittest.mock import patch, MagicMock
 from source.database import Database
 import mysql.connector
-from source.destination import Destination
 
 class TestDatabase(unittest.TestCase):
     @patch('mysql.connector.connect', return_value = MagicMock())
