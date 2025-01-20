@@ -17,16 +17,14 @@ def update_info(destination) -> None:
     img = dest_soup.find('div', 'main-img-box').find('img')
     destination.img = img['src']
 
-url = "https://www.kaerntencard.at/sommer/en/ausflugsziele-uebersicht/"
-soup = return_soup(url)
-
 #TODO rewrite to use multithreading without GIL
-def fetch_destinations() -> list[Destination]:
+def fetch_destinations(url: str) -> list[Destination]:
     """Fetches all destinations from the kaerntencard website.
 
     Returns:
         list[Destination]: List of all destinations.
     """
+    soup = return_soup(url)
     excursion_destinations = []
     for div in soup.find_all('div', class_='col-lg-6 col-11 align-self-center'):
         destination = Destination()

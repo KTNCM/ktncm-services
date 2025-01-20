@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from source.destinations_service import update_info
+from source.destinations_service import update_info, fetch_destinations
 from source.destination import Destination
 
 
@@ -16,3 +16,14 @@ class TestDestinationService(unittest.TestCase):
 
         # Assert
         mock_return_soup.assert_called_once_with("http://mock-url.com")
+
+    @patch('source.destinations_service.return_soup', return_value = MagicMock())
+    def test_fetch_destinations_calls_return_soup(self, mock_return_soup: MagicMock):
+        # Arrange
+        url = "https://www.kaerntencard.at/sommer/en/ausflugsziele-uebersicht/"
+
+        # Act
+        fetch_destinations(url)
+
+        # Assert
+        mock_return_soup.assert_called_once_with(url)
