@@ -1,0 +1,3 @@
+[run]
+omit =
+    */groq_playground.py
