@@ -1,11 +1,11 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from source.destinations_service import update_info, fetch_destinations
-from source.destination import Destination
+from source.scraper.destinations_service import update_info, fetch_destinations
+from source.scraper.destination import Destination
 
 
 class TestDestinationService(unittest.TestCase):
-    @patch('source.destinations_service.return_soup', return_value = MagicMock())
+    @patch('source.scraper.destinations_service.return_soup', return_value = MagicMock())
     def test_update_info_calls_return_soup(self, mock_return_soup: MagicMock):
         """Verify that return_soup is called within update_info.
 
@@ -22,7 +22,7 @@ class TestDestinationService(unittest.TestCase):
         # Assert
         mock_return_soup.assert_called_once_with("http://mock-url.com")
 
-    @patch('source.destinations_service.return_soup', return_value = MagicMock())
+    @patch('source.scraper.destinations_service.return_soup', return_value = MagicMock())
     def test_fetch_destinations_calls_return_soup(self, mock_return_soup: MagicMock):
         """Verify that return_soup is called within fetch_destination.
 

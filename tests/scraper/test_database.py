@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from source.database import Database
+from source.scraper.database import Database
 import mysql.connector
 
 class TestDatabase(unittest.TestCase):

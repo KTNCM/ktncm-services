@@ -1,6 +1,6 @@
 from unittest import mock
 from bs4 import BeautifulSoup
-from source.soup import return_soup
+from source.scraper.soup import return_soup
 
 mock_response = mock.Mock()
 mock_response.text = "<html><head><title>Test Page</title></head><body></body></html>"
