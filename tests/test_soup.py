@@ -1,4 +1,3 @@
-import pytest
 from unittest import mock
 from bs4 import BeautifulSoup
 from source.soup import return_soup

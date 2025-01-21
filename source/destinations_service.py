@@ -13,20 +13,18 @@ def update_info(destination) -> None:
     destination.description = p.text
     
     h4 = dest_soup.find('div', 'kontakt-box').findAll('a')
-    destination.contact_info = [i.text for i in h4]
+    destination.contact = [i.text for i in h4]
     img = dest_soup.find('div', 'main-img-box').find('img')
-    destination.img_url = img['src']
-
-url = "https://www.kaerntencard.at/sommer/en/ausflugsziele-uebersicht/"
-soup = return_soup(url)
+    destination.img = img['src']
 
 #TODO rewrite to use multithreading without GIL
-def fetch_destinations() -> list[Destination]:
+def fetch_destinations(url: str) -> list[Destination]:
     """Fetches all destinations from the kaerntencard website.
 
     Returns:
         list[Destination]: List of all destinations.
     """
+    soup = return_soup(url)
     excursion_destinations = []
     for div in soup.find_all('div', class_='col-lg-6 col-11 align-self-center'):
         destination = Destination()
