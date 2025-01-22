@@ -49,7 +49,7 @@ class Database:
         url = VALUES(url);
         """
 
-        data = [(dest.name, dest.description, "".join(dest.contact), "", dest.url) for dest in excursion_destinations]
+        data = [(dest.name, dest.description, "".join(dest.contact), "", dest.img) for dest in excursion_destinations]
 
         cursor = self.connection.cursor()
         cursor.executemany(insert_query, data)

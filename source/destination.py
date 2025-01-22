@@ -7,4 +7,4 @@ class Destination:
     url: str = None
     price: str = None
     contact: list = None
-    url: str = None
+    img: str = None
