@@ -21,6 +21,9 @@ def update_info(destination) -> None:
 def fetch_destinations(url: str) -> list[Destination]:
     """Fetches all destinations from the kaerntencard website.
 
+    Args:
+        url (str): Website url.
+
     Returns:
         list[Destination]: List of all destinations.
     """
