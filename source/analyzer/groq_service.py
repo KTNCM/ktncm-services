@@ -14,7 +14,7 @@ def analyze_sentiment(review):
                 (Start of review){review}(End of review)
                 Provide the answer in the following format:
                 category: positive, negative, neutral, mixed
-                sentiment polarity score: 0-100
+                confidence score: 0-100
                 Your example should be like this:
                 category: (category_name), score: (score_value)"""
             }
