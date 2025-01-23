@@ -17,9 +17,32 @@ def update_info(destination) -> None:
     img = dest_soup.find('div', 'main-img-box').find('img')
     destination.img = img['src']
 
+def fetch_destination_details(excursion_destinations: list[Destination]) -> list[Destination]:
+    """Fetches details in parallel.
+
+    Args:
+        excursion_destinations (list[Destination]): List of all destinations.
+
+    Returns:
+        list[Destination]: List of all destinations.
+    """
+    threads = []
+    for destination in excursion_destinations:
+        thread = threading.Thread(target=update_info, args=[destination])
+        threads.append(thread)
+        thread.start()
+    
+    for thread in threads:
+        thread.join()
+    
+    return excursion_destinations
+
 #TODO rewrite to use multithreading without GIL
 def fetch_destinations(url: str) -> list[Destination]:
     """Fetches all destinations from the kaerntencard website.
+
+    Args:
+        url (str): Website url.
 
     Returns:
         list[Destination]: List of all destinations.
@@ -39,13 +62,5 @@ def fetch_destinations(url: str) -> list[Destination]:
         destination.url = div.find('a', class_='btn-std')['href']
         excursion_destinations.append(destination)
     
-    threads = []
-    for destination in excursion_destinations:
-        thread = threading.Thread(target=update_info, args=[destination])
-        threads.append(thread)
-        thread.start()
+    return fetch_destination_details(excursion_destinations)
     
-    for thread in threads:
-        thread.join()
-    
-    return excursion_destinations

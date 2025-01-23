@@ -1,6 +1,6 @@
 import unittest
-from unittest.mock import patch, MagicMock
-from source.destinations_service import update_info, fetch_destinations
+from unittest.mock import patch, MagicMock, call
+from source.destinations_service import fetch_destination_details, update_info, fetch_destinations
 from source.destination import Destination
 
 
@@ -37,3 +37,20 @@ class TestDestinationService(unittest.TestCase):
 
         # Assert
         mock_return_soup.assert_called_once_with(url)
+
+    @patch('source.destinations_service.update_info')  # Mock the update_info function
+    def test_fetch_destination_details(self, mock_update_info):
+        # Create mock Destination objects
+        destination1 = MagicMock(spec=Destination)
+        destination2 = MagicMock(spec=Destination)
+        excursion_destinations = [destination1, destination2]
+        
+        # Call the function being tested
+        result = fetch_destination_details(excursion_destinations)
+        
+        # Assert that update_info was called once for each destination
+        self.assertEqual(mock_update_info.call_count, 2)
+        mock_update_info.assert_has_calls([call(destination1), call(destination2)], any_order=True)
+        
+        # Assert that the result matches the input (function returns the input list)
+        self.assertEqual(result, excursion_destinations)
