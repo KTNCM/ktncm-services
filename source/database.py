@@ -14,6 +14,8 @@ class Database:
             'password': os.getenv('DB_PASSWORD'),
             'db': os.getenv('DB_NAME'),
             'port': os.getenv('DB_PORT'),
+            'ssl_ca': os.getenv('DB_CERTIFICATE'),
+            'ssl_verify_cert': bool(os.getenv('DB_VERIFY'))
         }
 
     def connect(self, max_retries = 10, sleep_time = 5) -> None:
@@ -53,5 +55,7 @@ class Database:
 
         cursor = self.connection.cursor()
         cursor.executemany(insert_query, data)
+        rows_affected = cursor.rowcount
+        print(f"Rows affected: {rows_affected}")
 
         self.connection.commit()
