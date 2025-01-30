@@ -51,6 +51,7 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   push-to-google:
+    needs: test
     runs-on: ubuntu-latest
 
     steps:
