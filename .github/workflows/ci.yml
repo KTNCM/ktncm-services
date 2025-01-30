@@ -49,3 +49,29 @@ jobs:
           files: ./coverage.xml
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  push-to-google:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Google Cloud SDK
+      uses: google-github-actions/setup-gcloud@v1
+      with:
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        export_default_credentials: true
+
+    - name: Authenticate Docker to Google Artifact Registry
+      run: |
+        gcloud auth configure-docker europe-west6-docker.pkg.dev
+
+    - name: Build Docker image
+      run: |
+        docker build -t europe-west6-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/ktncm-docker/python-scraper:v1 .
+
+    - name: Push Docker image
+      run: |
+        docker push europe-west6-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/ktncm-docker/python-scraper:v1
