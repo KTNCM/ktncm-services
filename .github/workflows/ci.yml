@@ -70,7 +70,8 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t europe-west6-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/ktncm-docker/python-scraper:v1 .
+        docker build --build-arg DB_CERTIFICATE_B64="${{ secrets.DB_CERTIFICATE_B64 }}" \
+                   -t europe-west6-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/ktncm-docker/python-scraper:v1 .
 
     - name: Push Docker image
       run: |

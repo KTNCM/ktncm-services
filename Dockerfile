@@ -2,7 +2,8 @@ FROM python:3.12.1
 
 WORKDIR /app
 
-COPY certs/ca.pem /etc/ssl/certs/ca.pem
+ARG DB_CERTIFICATE
+ENV DB_CERTIFICATE=$DB_CERTIFICATE
 
 COPY . /app
 
